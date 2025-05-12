@@ -53,7 +53,7 @@ export class AuthService {
     return result;
   }
 
-  async register(registerDto: RegisterDto) {
+  async register(registerDto: RegisterDto, req: any) {
     // Check if user already exists
     const existingUser = await this.usersService.findByEmail(registerDto.email);
     
@@ -79,6 +79,12 @@ export class AuthService {
     
     // Remove password from the returned user object
     const { password: _, ...result } = user;
+
+    // Log in the user by creating a session
+    req.session.passport = {
+      user: user.id
+    };
+
     return result;
   }
 }

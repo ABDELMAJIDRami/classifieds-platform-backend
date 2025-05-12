@@ -35,8 +35,7 @@ async function bootstrap() {
       saveUninitialized: false,
       cookie: {
         httpOnly: true,
-        // Todo: sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-        // sameSite: 'lax',
+        secure: false,  // 👈 must be false for HTTP. In production, when using HTTPS, it should be true. Otherwise, the browser will not send cookies over HTTPS for security reasons.
         maxAge: 24 * 60 * 60 * 1000, // 1 day
       },
     }),

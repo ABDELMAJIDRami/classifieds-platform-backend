@@ -25,8 +25,8 @@ export class AuthController {
   }
 
   @Post('register')
-  async register(@Body() registerDto: RegisterDto) {
-    return this.authService.register(registerDto);
+  async register(@Body() registerDto: RegisterDto, @Request() req) {
+    return this.authService.register(registerDto, req);
   }
 
   @UseGuards(AuthenticatedGuard)
